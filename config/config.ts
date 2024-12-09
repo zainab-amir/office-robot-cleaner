@@ -4,8 +4,9 @@ import { z } from 'zod';
 import fromZodSchema from 'zod-to-json-schema';
 
 const appEnvSchema = z.object({
+  API_HOST: z.string().default('127.0.0.1'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
-  HOST: z.string().default('localhost'),
+  HOST: z.string().default('127.0.0.1'),
   PORT: z.coerce.number().default(5000),
   DB_CLIENT: z.string(),
   DB_HOST: z.string(),
@@ -35,6 +36,9 @@ export function loadEnv(): AppEnvConfig {
   });
   if (process.env.NODE_ENV !== 'production') {
     dotenv.config({ path: path.join(projectRoot, '.env.local'), override: true });
+  }
+  if (process.env.LOAD_DOCKER_ENV === 'true') {
+    dotenv.config({ path: path.join(projectRoot, '.env.docker'), override: true });
   }
 
   const result = appEnvSchema.safeParse(process.env);
