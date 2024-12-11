@@ -9,5 +9,7 @@
     "strict": true,
     "skipLibCheck": true
   },
-  "exclude": ["config/jest.config.ts", "config/jest.*.config.ts", "node_modules", "src/**/**/__tests__/*", "src/test/*"]
+  "exclude": ["config/jest.config.ts", "config/jest.*.config.ts", "node_modules", "src/**/**/__tests__/*",
+    "src/tests/*"
+  ]
 }

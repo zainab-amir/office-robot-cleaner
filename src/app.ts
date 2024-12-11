@@ -29,6 +29,9 @@ async function App(fastify: FastifyInstance, opts: FastifyPluginOptions) {
   });
 
   // Load all plugins
+  // Note: Fastify loads the plugin in alphabetical order. Its essential that the knex connection
+  // be made available to be used by other services. Do this by naming the file so that its picked
+  // first.Another solution would be to manually register each plugin in order.
   await fastify.register(AutoLoad, {
     dir: path.join(__dirname, 'plugins'),
     options: Object.assign({}, opts),
