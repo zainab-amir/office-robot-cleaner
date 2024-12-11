@@ -10,6 +10,7 @@ const appEnvSchema = z.object({
   PORT: z.coerce.number().default(5000),
   DB_CLIENT: z.string(),
   DB_HOST: z.string(),
+  DB_PORT: z.coerce.number().default(5432),
   DB_NAME: z.string(),
   DB_USER: z.string(),
   DB_PASSWORD: z.string(),
@@ -34,8 +35,11 @@ export function loadEnv(): AppEnvConfig {
   dotenv.config({
     path: path.join(projectRoot, '.env'),
   });
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV === 'development') {
     dotenv.config({ path: path.join(projectRoot, '.env.local'), override: true });
+  }
+  if (process.env.NODE_ENV === 'test') {
+    dotenv.config({ path: path.join(projectRoot, '.env.test'), override: true });
   }
   if (process.env.LOAD_DOCKER_ENV === 'true') {
     dotenv.config({ path: path.join(projectRoot, '.env.docker'), override: true });

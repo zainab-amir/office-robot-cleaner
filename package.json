@@ -1,18 +1,18 @@
 {
-  "name": "@tibber/robot",
+  "name": "@zainab/office-robot-cleaner",
   "version": "1.0.0",
   "main": "server.ts",
   "types": "server.d.ts",
   "scripts": {
-    "start": "npm run build && node dist/server.js",
+    "start": "node dist/server.js",
     "dev": "npx nodemon",
     "build": "tsc -p tsconfig.json",
-    "test": "echo \"Error: no src/test specified\" && exit 1",
+    "test:unit": "jest -c config/jest.unit.config.ts",
+    "test:integration": "docker compose -f docker-compose.test.yml up -d && sleep 2 && jest -c config/jest.integration.config.ts; JEST_EXIT_CODE=$?; docker compose -f docker-compose.test.yml down; exit $JEST_EXIT_CODE",
+    "test": "npm run test:unit && npm run test:integration",
     "migrate": "ts-node scripts/runMigrations.ts",
     "migrate:make": "knex --knexfile ./config/knexfile.ts migrate:make",
-    "migrate:rollback": "knex --knexfile ./config/knexfile.ts migrate:rollback",
-    "seed:make": "knex seed:make",
-    "seed:run": "knex seed:run"
+    "migrate:rollback": "knex --knexfile ./config/knexfile.ts migrate:rollback"
   },
   "keywords": [],
   "author": "Zainab Amir",
@@ -31,16 +31,19 @@
     "knex": "^3.1.0",
     "nodemon": "^2.0.22",
     "pg": "^8.13.1",
+    "ts-node": "^10.9.1",
     "zod": "^3.23.8",
     "zod-to-json-schema": "^3.23.5"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
     "eslint": "^9.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
+    "jest": "^29.7.0",
     "prettier": "^3.4.2",
-    "ts-node": "^10.9.1",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.17.0"
   }

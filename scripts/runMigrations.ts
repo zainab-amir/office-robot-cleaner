@@ -1,6 +1,6 @@
 import knex from 'knex';
 
-import { loadEnv } from '../config/config';
+import { loadEnv } from '../config/app.config';
 import knexConfig from '../config/knexfile';
 
 async function runMigrations() {
