@@ -21,4 +21,5 @@ async function robotDBPlugin(fastify: FastifyInstance) {
 
 export default fp(robotDBPlugin, {
   name: 'robotDB',
+  dependencies: ['knex'],
 });
