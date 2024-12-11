@@ -3,7 +3,15 @@ import path from 'path';
 import { z } from 'zod';
 import fromZodSchema from 'zod-to-json-schema';
 
+const convertToStringsArray = (value: string) => {
+  if (!value || value === '') {
+    return null;
+  }
+  return value.split(',');
+};
+
 const appEnvSchema = z.object({
+  ALLOWED_DOMAINS: z.string().transform(convertToStringsArray).default('*').describe('List of allowed CORS origins'),
   API_HOST: z.string().default('127.0.0.1'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   HOST: z.string().default('127.0.0.1'),
@@ -35,11 +43,10 @@ export function loadEnv(): AppEnvConfig {
   dotenv.config({
     path: path.join(projectRoot, '.env'),
   });
-  if (process.env.NODE_ENV === 'development') {
-    dotenv.config({ path: path.join(projectRoot, '.env.local'), override: true });
-  }
   if (process.env.NODE_ENV === 'test') {
     dotenv.config({ path: path.join(projectRoot, '.env.test'), override: true });
+  } else if (process.env.NODE_ENV !== 'production') {
+    dotenv.config({ path: path.join(projectRoot, '.env.local'), override: true });
   }
   if (process.env.LOAD_DOCKER_ENV === 'true') {
     dotenv.config({ path: path.join(projectRoot, '.env.docker'), override: true });
@@ -47,7 +54,7 @@ export function loadEnv(): AppEnvConfig {
 
   const result = appEnvSchema.safeParse(process.env);
   if (!result.success) {
-    throw new Error('Invalid environment variables');
+    throw new Error(`Invalid environment variables: ${JSON.stringify(result.error)}`);
   }
 
   return result.data;

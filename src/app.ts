@@ -25,7 +25,7 @@ async function App(fastify: FastifyInstance, opts: FastifyPluginOptions) {
 
   // Enable CORS
   await fastify.register(Cors, {
-    origin: false,
+    origin: fastify.config.ALLOWED_DOMAINS ? [fastify.config.ALLOWED_DOMAINS] : false,
   });
 
   // Load all plugins

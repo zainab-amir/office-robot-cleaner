@@ -8,3 +8,10 @@ services:
       POSTGRES_USER: test
       POSTGRES_PASSWORD: test
       POSTGRES_DB: database
+    networks:
+      - robot_network_test
+
+networks:
+  robot_network_test:
+    name: robot_network_test
+    driver: bridge
