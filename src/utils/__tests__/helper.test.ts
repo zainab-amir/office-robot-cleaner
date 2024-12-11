@@ -9,7 +9,7 @@ describe('Helper Tests', () => {
       expect(yMaxHash).not.toBe(nearYMaxHash);
 
       const xMaxHash = createHash(X_MAX, Y_MIN);
-      const nearXMaxHash = createHash(X_MAX, Y_MIN+1);
+      const nearXMaxHash = createHash(X_MAX, Y_MIN + 1);
       expect(xMaxHash).not.toBe(nearXMaxHash);
 
       const mixedHash1 = createHash(X_MAX, Y_MIN);

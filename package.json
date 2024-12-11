@@ -6,18 +6,22 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "npx nodemon",
+    "clean": "rm -rf dist",
     "build": "tsc -p tsconfig.json",
     "test:unit": "jest -c config/jest.unit.config.ts",
     "test:integration": "docker compose -f docker-compose.test.yml up -d && sleep 2 && jest -c config/jest.integration.config.ts; JEST_EXIT_CODE=$?; docker compose -f docker-compose.test.yml down; exit $JEST_EXIT_CODE",
     "test": "npm run test:unit && npm run test:integration",
     "migrate": "ts-node scripts/runMigrations.ts",
     "migrate:make": "knex --knexfile ./config/knexfile.ts migrate:make",
-    "migrate:rollback": "knex --knexfile ./config/knexfile.ts migrate:rollback"
+    "migrate:rollback": "knex --knexfile ./config/knexfile.ts migrate:rollback",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{ts,json,md}\""
   },
-  "keywords": [],
+  "keywords": ["typescript", "fastify"],
   "author": "Zainab Amir",
   "license": "ISC",
-  "description": "",
+  "description": "An automated office robot cleaning management system",
   "dependencies": {
     "@fastify/autoload": "^6.0.2",
     "@fastify/cors": "^10.0.1",
