@@ -1,4 +1,5 @@
 import { TimedResponse } from './common.types';
+import { HASH_MULTIPLIER } from './constants';
 
 /**
  * Wrapper function that measures the execution time in seconds of the provided function
@@ -30,4 +31,20 @@ export function timedExecution<TParams extends unknown[], TReturn>(
       duration: (end - start) / 1000,
     };
   };
+}
+
+/**
+ * Creates a unique hash for a 2D coordinate pair (x,y) where both coordinates are integers.
+ *
+ * @param x - x-coordinate
+ * @param y - y-coordinate
+ * @returns {number} A unique hash value
+ *
+ * @example
+ * // Lets suppose HASH_MULTIPLIER = 200001;
+ * createHash(1, 2)     // Returns 200_003
+ * createHash(-5, 3)    // Returns -999_902
+ */
+export function createHash(x: number, y: number): number {
+  return x * HASH_MULTIPLIER + y;
 }
