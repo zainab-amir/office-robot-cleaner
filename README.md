@@ -55,6 +55,15 @@ npm run migrate
 
 The service will be available at `http://localhost:5000`
 
+## API Documentation
+
+The API documentation is available through Swagger when the server is running:
+
+```
+http://localhost:5000/docs
+http://localhost:5000/docs/json
+```
+
 ### Running Tests
 
 The project includes both unit and integration tests:
@@ -158,13 +167,4 @@ office-robot-cleaner/
 ├── Dockerfile
 ├── package.json
 └── package-lock.json
-```
-
-## API Documentation
-
-The API documentation is available through Swagger when the server is running:
-
-```
-http://localhost:5000/docs
-http://127.0.0.1:5000/docs/json
 ```
