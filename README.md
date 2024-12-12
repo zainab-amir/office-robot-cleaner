@@ -96,7 +96,7 @@ The project uses Knex.js for database migrations:
 npm run migrate:make <migration-name>
 ```
 
-- Run migrations (If you running it for development using Docker, make sure the container is running):
+- Run migrations (If you are running it for development using Docker, make sure the container is running):
 
 ```bash
 npm run migrate
@@ -120,14 +120,6 @@ The Docker Compose configuration includes:
 - **PostgreSQL Database**:
   - Development: Port 5432
   - Test: Port 5433
-
-## Scripts
-
-- `npm run dev`: Start development server with hot reload
-- `npm run build`: Build TypeScript code
-- `npm start`: Run production server
-- `npm test`: Run all tests
-- `npm run migrate`: Run database migrations
 
 ## Project Structure
 

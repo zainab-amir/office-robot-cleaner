@@ -30,8 +30,11 @@ describe('Helper Tests', () => {
     it('should measure correct duration with mocked time', () => {
       const startTime = 1000;
       const endTime = 1500;
-      const originalNow = performance.now;
-      performance.now = jest.fn().mockReturnValueOnce(startTime).mockReturnValueOnce(endTime);
+      const originalNow = performance;
+      performance = {
+        ...originalNow,
+        now: jest.fn().mockReturnValueOnce(startTime).mockReturnValueOnce(endTime),
+      };
 
       type TestFn = (x: number) => number;
       const testFn: TestFn = (x) => x * 2;
@@ -43,7 +46,7 @@ describe('Helper Tests', () => {
       expect(duration).toBe((endTime - startTime) / 1000);
       expect(performance.now).toHaveBeenCalledTimes(2);
 
-      performance.now = originalNow;
+      performance = originalNow;
     });
   });
 });
