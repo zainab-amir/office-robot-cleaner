@@ -45,6 +45,9 @@ cp .env.example .env.local
 
 4. Start the development environment using Docker Compose:
 
+If you are running this on Mac then chances are port `5000` is already in use by "AirPlay Receiver". Change 
+the port or disable the service from `System Settings > General > AirDrop & Handoff > AirPlay Receiver.`
+
 ```bash
 docker compose up
 ```
