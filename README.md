@@ -1,6 +1,7 @@
 # Office Robot Cleaner
 
 A Node.js microservice built with TypeScript and Fastify framework.
+For improvement considerations: [docs](./docs/improvments).
 
 ## Prerequisites
 
