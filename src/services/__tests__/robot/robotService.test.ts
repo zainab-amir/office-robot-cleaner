@@ -28,6 +28,18 @@ describe('Robot Service', () => {
     expect(result).toEqual(4);
   });
 
+  test('random pattern with a line segment that does not overlap', () => {
+    const result = getUniquePlacesCleaned({ x: 0, y: 0 }, [
+      { direction: 'north', steps: 1 },
+      { direction: 'east', steps: 1 },
+      { direction: 'north', steps: 1 },
+      { direction: 'west', steps: 5 },
+      { direction: 'south', steps: 1 },
+      { direction: 'east', steps: 1 },
+    ]);
+    expect(result).toEqual(11);
+  });
+
   test('max square pattern from positive start position', () => {
     const result = getUniquePlacesCleaned({ x: 0, y: 0 }, [
       { direction: 'north', steps: 99999 },

@@ -10,3 +10,14 @@ export type CleanOfficeRequest = {
   start: Point;
   commands: Command[];
 };
+
+export type Range = {
+  min: number;
+  max: number;
+};
+
+// Store ranges for each x or y coordinate
+export type LineRanges = {
+  ranges: Range[];
+  totalPoints: number;
+};
